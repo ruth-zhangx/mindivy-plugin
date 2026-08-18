@@ -1,0 +1,16 @@
+{
+  "description": "Mindivy plugin — inject workspace state (latest checkpoint + open tasks) at session start. Read-only, idempotent, never blocks the session.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PLUGIN_ROOT/hooks/session_start.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

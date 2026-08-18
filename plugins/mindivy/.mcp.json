@@ -1,0 +1,7 @@
+{
+  "mindivy": {
+    "type": "stdio",
+    "command": "bash",
+    "args": ["${CLAUDE_PLUGIN_ROOT}/servers/mindivy-mcp.sh"]
+  }
+}

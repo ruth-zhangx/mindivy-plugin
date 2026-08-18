@@ -1,0 +1,12 @@
+{
+  "name": "mindivy-official",
+  "description": "Official Mindivy plugin pack for Claude Code — grounded research and co-creation against your Mindivy knowledge base.",
+  "owner": { "name": "Mindivy" },
+  "plugins": [
+    {
+      "name": "mindivy",
+      "source": "./plugins/mindivy",
+      "description": "Mindivy co-creation workflow: /mindivy:research, /mindivy:draft-chapter, SessionStart workspace digest, bundled mindivy-mcp server config."
+    }
+  ]
+}

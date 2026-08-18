@@ -1,0 +1,8 @@
+{
+  "name": "mindivy",
+  "version": "0.1.1",
+  "description": "Mindivy co-creation workflow for Claude Code: grounded research and chapter drafting against your Mindivy knowledge base.",
+  "author": { "name": "Mindivy" },
+  "license": "proprietary",
+  "keywords": ["mindivy", "knowledge-base", "research", "co-creation"]
+}
