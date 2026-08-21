@@ -4,7 +4,7 @@
 # @input: stdin JSON (Claude Code SessionStart payload: {session_id, transcript_path, cwd, permission_mode, hook_event_name, source})
 # @output: stdout JSON {"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "<digest>"}} (only when a digest was built)
 # @side_effects: none
-# @description: T186 plugin SessionStart hook — inject Mindivy workspace state (latest checkpoint + open tasks) via additionalContext. H10 pattern: stdlib-only, never raises, always exit 0. Binds to the cwd from stdin payload, never the process CWD (G076/G077).
+# @description: T186 plugin SessionStart hook — inject Mindivy workspace state (latest checkpoint + open tasks) via additionalContext. H10 pattern: stdlib-only, never raises, always exit 0. Binds to the cwd from stdin payload, never the process CWD (G076/G077). Digest starts with a wall-clock "Now" line (G128).
 # ---
 
 """Mindivy workspace-state digest for Claude Code SessionStart.
@@ -22,13 +22,15 @@ Digest sources (dev mode): newest checkpoint frontmatter + Remaining Work list
 (`docs/checkpoints/*.md`, YYYYMMDD-HHMMSS filename prefix sorts lexicographically)
 and open-task counts from `docs/assets/master-task-inventory.md`
 (`| T<digits> |` rows only — the 2-column legend table carries the same markers
-and must be excluded).
+and must be excluded). Digest line 2 is a wall-clock `Now` stamp (G128) — the
+checkpoint timestamp is a stale snapshot, never a substitute for real time.
 """
 
 import json
 import os
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 
 MAX_REMAINING_ITEMS = 5
@@ -191,6 +193,7 @@ def build_digest(cwd: "str | None", env: dict) -> str:
         counts = count_open_tasks(repo / "docs" / "assets" / "master-task-inventory.md")
         lines = [
             f"**Mindivy workspace state** (auto-injected by the mindivy plugin — repo: {repo})",
+            f"- **Now: {datetime.now().astimezone():%Y-%m-%d %H:%M %Z}**",
         ]
         if info and (info["title"] or info["remaining"]):
             cp_name = checkpoint.name
