@@ -14,14 +14,14 @@ Requires Claude Code ≥ 1.0.33.
 
 ```
 /plugin marketplace add ruth-zhangx/mindivy-plugin
-/plugin install mindivy@mindivy-plugin
+/plugin install mindivy@mindivy-official
 ```
 
 **China mirror (Gitee):**
 
 ```
 /plugin marketplace add https://gitee.com/ruth-zhangx/mindivy-plugin
-/plugin install mindivy@mindivy-plugin
+/plugin install mindivy@mindivy-official
 ```
 
 ## Prerequisites
