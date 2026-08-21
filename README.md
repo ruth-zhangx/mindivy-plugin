@@ -20,7 +20,7 @@ Requires Claude Code ≥ 1.0.33.
 **China mirror (Gitee):**
 
 ```
-/plugin marketplace add https://gitee.com/ruth-zhangx/mindivy-plugin
+/plugin marketplace add https://gitee.com/ruth-zhangx/mindivy-plugin.git
 /plugin install mindivy@mindivy-official
 ```
 
