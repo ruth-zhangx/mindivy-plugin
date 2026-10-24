@@ -2,6 +2,10 @@
 
 T186：Mindivy 共创工作流分发载体。安装一次即得：知识库检索（MCP 5 工具）+ 两个共创命令 + SessionStart 工作区状态注入。
 
+## 版本
+
+插件版本（`.claude-plugin/plugin.json`）**独立于** Mindivy app 版本（仓库根 `package.json`），两者不要求一致：插件版本只影响 Claude Code 的安装/更新缓存。当前插件版本：**0.1.2**。
+
 ## 组件
 
 | 组件 | 路径 | 作用 |
