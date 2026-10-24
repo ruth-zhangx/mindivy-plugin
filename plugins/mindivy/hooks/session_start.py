@@ -21,9 +21,10 @@ Resolution order (first hit wins):
 Digest sources (dev mode): newest checkpoint frontmatter + Remaining Work list
 (`docs/checkpoints/*.md`, YYYYMMDD-HHMMSS filename prefix sorts lexicographically)
 and open-task counts from `docs/assets/master-task-inventory.md`
-(`| T<digits> |` rows only — the 2-column legend table carries the same markers
-and must be excluded). Digest line 2 is a wall-clock `Now` stamp (G128) — the
-checkpoint timestamp is a stale snapshot, never a substitute for real time.
+(`| T<digits> |` and `| **T<digits>** |` rows — the 2-column legend table
+carries the same markers and must be excluded). Digest line 2 is a wall-clock
+`Now` stamp (G128) — the checkpoint timestamp is a stale snapshot, never a
+substitute for real time.
 """
 
 import json
@@ -41,7 +42,7 @@ _TITLE_RE = re.compile(r"^##\s+Working on:\s*(.+)$")
 _DATE_RE = re.compile(r"^timestamp:\s*(.+)$")
 _SECTION_RE = re.compile(r"^###\s+")
 _NUMBERED_RE = re.compile(r"^(\d+)\.\s+(.*)$")
-_TASK_ROW_RE = re.compile(r"^\|\s*T\d+\s*\|")
+_TASK_ROW_RE = re.compile(r"^\|\s*\*{0,2}T\d+\*{0,2}\s*\|")
 
 
 def find_repo(cwd: str) -> "Path | None":
@@ -115,10 +116,11 @@ def parse_checkpoint(path: "Path") -> dict:
 
 def count_open_tasks(inventory: "Path") -> "dict | None":
     """Count open task rows in master-task-inventory.md. Only rows starting
-    with `| T<digits> |` are task rows — the 2-column legend table uses the
-    same markers and must be excluded. Status sits in the 4th split cell
-    (backticked: `[ ]` / `[~]` / `[R]`). Returns None when the inventory is
-    missing/unreadable (caller omits the line, never reports false zeros)."""
+    with `| T<digits> |` or `| **T<digits>** |` are task rows — the 2-column
+    legend table uses the same markers and must be excluded. Status sits in
+    the 4th split cell (backticked: `[ ]` / `[~]` / `[R]`). Returns None when
+    the inventory is missing/unreadable (caller omits the line, never reports
+    false zeros)."""
     counts = {"open": 0, "in_progress": 0, "blocked": 0}
     try:
         text = inventory.read_text(encoding="utf-8", errors="replace")

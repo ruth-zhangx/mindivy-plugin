@@ -27,3 +27,9 @@ Requires Claude Code ≥ 1.0.33.
 ## Prerequisites
 
 - The Mindivy desktop app with your knowledge base (`~/.mindivy` workspace state) for the SessionStart digest and MCP server.
+
+## Tests
+
+```
+python3 -m unittest discover -s tests -v
+```
